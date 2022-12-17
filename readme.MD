@@ -9,3 +9,6 @@ i.e.
 ```bash
 python3 makeGIF.py /mnt/images /mnt/outputs --frame 3 --name {movie}
 ```
+
+### example
+![Example](demo/demo.gif)
