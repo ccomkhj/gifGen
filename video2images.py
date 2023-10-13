@@ -2,6 +2,7 @@
 import cv2
 import os
 import argparse
+import time
 
 
 def video_to_frames(video: str, path_output_dir: str, frame: int):
@@ -10,12 +11,17 @@ def video_to_frames(video: str, path_output_dir: str, frame: int):
     vidcap = cv2.VideoCapture(video)
     count = 0
     numbering = 0
+    now = str(int(time.time()))
+    parent_path = os.path.join(path_output_dir, now)
+    os.makedirs(parent_path, exist_ok=True)
+    
     while vidcap.isOpened():
         count += 1
         success, image = vidcap.read()
         if success:
             if count % int(frame) == 0:
-                file_name = os.path.join(path_output_dir, "b_%d.png") % numbering
+                file_name = os.path.join(
+                    parent_path, "footage_%d.png") % numbering
                 print(f"save {file_name}.")
                 cv2.imwrite(file_name, image)
                 numbering += 1
